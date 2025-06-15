@@ -1,38 +1,67 @@
 body {
   margin: 0;
-  padding: 0;
+  padding: 0; /* Tambahkan ini juga, untuk berjaga-jaga */
   font-family: Arial, sans-serif;
   background-color: #f3f3f3;
 }
 
+/* Header sekarang tidak dibatasi oleh container */
 .header {
   background-color: #3f51b5;
   color: white;
-  padding: 15px;
-  font-size: 20px;
+  padding: 19px;
+  font-size: 21px;
   text-align: center;
   font-weight: bold;
   margin: 0;
-  position: fixed;
+  position: fixed; /* Ini yang menyebabkan header mengambang */
   top: 0;
   left: 0;
   width: 100%;
+  box-sizing: border-box; /* Penting untuk padding */
   z-index: 10;
+  height: 60px; /* Tambahkan tinggi eksplisit untuk header */
 }
 
 .container {
   max-width: 600px;
   margin: auto;
   padding: 20px;
-  padding-top: 60px; /* Tambahkan padding atas agar konten tidak tertutup header */
-  padding-bottom: 130px;
+  padding-bottom: 130px; /* beri ruang agar tombol tidak menutupi soal */
   background: white;
-  min-height: 100vh;
+  min-height: calc(100vh - 50px - 130px); /* Sesuaikan min-height: total viewport - tinggi header - tinggi fixed-bottom */
   position: relative;
+  /* Tambahan: Berikan padding-top yang setara dengan tinggi header */
+  padding-top: calc(50px + 20px); /* Tinggi header (50px) + margin-top awal counter (20px) */
+  /* margin-top: 0; <-- Ini tidak diperlukan lagi karena padding-top yang menangani spasi */
 }
 
+/* Gaya baru untuk bulatan nomor soal - sekarang berwarna biru */
+.question-counter {
+  width: 55px; /* Diameter bulatan */
+  height: 55px;
+  background-color: #3f51b5; /* Warna biru, sama seperti tombol aktif */
+  color: white;
+  border-radius: 50%; /* Membuatnya bulat */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  /* Sesuaikan margin di sini, hanya margin-bottom yang mungkin perlu dipertahankan */
+  margin: 0 auto 20px; /* Margin atas sudah ditangani oleh padding-top container */
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+.question-counter:hover {
+  background-color: #303f9f; /* Warna biru sedikit lebih gelap saat hover */
+}
+/* Akhir gaya baru */
+
 .question-box {
-  margin: 30px 0 10px;
+  margin: 10px 0 10px; /* Sesuaikan margin atas setelah counter */
   font-size: 18px;
 }
 
@@ -60,18 +89,21 @@ body {
   color: #721c24;
 }
 
+/* Tombol di bagian bawah */
 .fixed-bottom {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  max-width: 600px;
+  max-width: 600px; /* Agar tetap pada lebar container utama */
+  margin: 0 auto; /* Tengah secara horizontal */
   background: #fff;
   padding: 15px 20px;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }
 
+/* Tombol navigasi kiri-kanan */
 .nav-buttons {
   display: flex;
   justify-content: space-between;
@@ -98,6 +130,7 @@ body {
   background-color: #bbb;     /* efek hover opsional */
 }
 
+/* Tombol jawaban A–D */
 .answer-buttons {
   display: flex;
   justify-content: center;
@@ -118,4 +151,123 @@ body {
 .answer-buttons button.active {
   background-color: #3f51b5;
   color: white;
+}
+
+/* Gaya untuk Modal Ringkasan */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#summary-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#summary-list li {
+  padding: 8px 0;
+  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+#summary-list li:last-child {
+  border-bottom: none;
+}
+
+.summary-question-number {
+  font-weight: bold;
+  min-width: 30px;
+}
+
+.summary-answer {
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-weight: bold;
+  color: white;
+  min-width: 20px;
+  text-align: center;
+}
+
+.summary-answer.correct {
+  background-color: #4CAF50;
+}
+
+.summary-answer.wrong {
+  background-color: #f44336;
+}
+
+.summary-answer.unanswered {
+  background-color: #999;
+}
+
+.score-display {
+  font-size: 0.8em; /* Ukuran font lebih kecil dari judul */
+  color: #555; /* Warna teks */
+  margin-left: 10px; /* Jarak dari "Ringkasan Jawaban" */
+}
+
+/* Jika Anda ingin skor di pojok kanan atas, Anda bisa menggunakan flexbox atau absolute positioning */
+/* Contoh dengan flexbox pada modal-header */
+.modal-header {
+  display: flex;
+  justify-content: space-between; /* Untuk memisahkan judul dan tombol close */
+  align-items: center;
+}
+
+.modal-header h2 {
+  flex-grow: 1; /* Biarkan judul mengambil ruang */
+  display: flex;
+  justify-content: flex-start; /* Atau space-between jika ada elemen lain di h2 */
+  align-items: center;
+}
+
+.modal-header .score-display {
+  margin-left: auto; /* Memindahkan skor ke kanan jika dalam flexbox */
+  /* Atau Anda bisa letakkan score-display di luar h2 tapi di dalam modal-header dan atur flex-basis/width */
+}
+
+.close-button {
+    display: none; /* Ini akan menyembunyikan elemen */
 }
