@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LATIHAN SOAL IPA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">LATIHAN SOAL IPA</div>
+    <div class="question-box" id="question"></div>
+    <div class="options-box" id="options"></div>
+    <div id="feedback" class="feedback"></div>
+    <div class="fixed-bottom">
+      <div class="nav-buttons">
+        <button onclick="prevQuestion()">←</button>
+        <button onclick="nextQuestion()">→</button>
+      </div>
+      <div class="answer-buttons">
+        <button onclick="selectAnswer('A')" id="btnA">A</button>
+        <button onclick="selectAnswer('B')" id="btnB">B</button>
+        <button onclick="selectAnswer('C')" id="btnC">C</button>
+        <button onclick="selectAnswer('D')" id="btnD">D</button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
