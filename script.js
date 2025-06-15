@@ -118,6 +118,9 @@ const questions = [
     q: "11. Sebuah sonar digunakan untuk mendeteksi objek di bawah air. Jika bunyi dipancarkan dan gema diterima dalam 0,6 detik, dan cepat rambat bunyi di air adalah 1400 m/s, berapa jarak objek tersebut dari sonar?",
     options: {
       A: "420 m",
+      B: "529 m",
+      C: "221 m",
+      D: "104 m"
     },
     answer: "A",
     explanation: "Jarak total = v × t = 1400 m/s × 0,6 s = 840 m. Jarak objek = Jarak total / 2 = 840 m / 2 = 420 m."
