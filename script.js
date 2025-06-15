@@ -648,7 +648,7 @@ const questions = [
     q: "56. Titik di dalam bumi tempat gempa bumi berasal atau pecahnya batuan pertama kali disebut...",
     options: {
       A: "Episentrum",
-      B: "Fokus gempa",
+      B: "Fokus gempa (hiposentrum)",
       C: "Pusat gempa",
       D: "Semua jawaban benar"
     },
